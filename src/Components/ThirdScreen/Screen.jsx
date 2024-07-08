@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Draggable from "./Draggable";
 
 const ThirdScreen = () => {
   return (
-    <div>ThirdScreen</div>
-  )
-}
+    <>
+      <Draggable />
+    </>
+  );
+};
 
-export default ThirdScreen
+export default ThirdScreen;
