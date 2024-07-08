@@ -86,7 +86,6 @@ const SecondScreen = () => {
               Error fetching data
             </div>
           )}
-          {/* {startIndex === endIndex && search !== "" && <div>No data found</div>} */}
           {!isError && !isLoading && (
             <div className="grid grid-cols-11 rounded-lg border border-[#073763]">
               <div className="border rounded-ss-lg border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
