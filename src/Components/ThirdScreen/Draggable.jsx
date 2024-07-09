@@ -32,9 +32,6 @@ const Draggable = () => {
     const sortedItems = [...items].sort((a, b) => {
       const layoutA = layout.find((layoutItem) => layoutItem.i === a.phone);
       const layoutB = layout.find((layoutItem) => layoutItem.i === b.phone);
-      if (!layoutA || !layoutB) {
-        return 0; // If either layoutA or layoutB is undefined, consider them equal
-      }
       return layoutA.y - layoutB.y;
     });
     setItems(sortedItems);
