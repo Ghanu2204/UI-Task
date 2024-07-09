@@ -8,7 +8,7 @@ const Switch = ({ isChecked, onChange, bgChecked, bgUnChecked, bgUnCheckedColor 
         <div className="relative">
           <Textfield
             type={"checkbox"}
-            other={"sr-only"}
+            className={"sr-only"}
             checked={isChecked}
             onChange={onChange}
           />

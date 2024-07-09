@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Textfield from "../FirstScreen/TextfieldComponent";
 import Dropdown from "../FirstScreen/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import APIData from "./APIData";
 import Switch from "../FirstScreen/Switch";
 import Pagination from "./Pagination";
+import useFetch from "../hook/useFetch";
 
 const SecondScreen = () => {
-  const [search, setSearch] = useState("");
-  const [location, setLocation] = useState("");
-
   const {
     data,
     isError,
@@ -24,9 +21,11 @@ const SecondScreen = () => {
     totalPage,
     itemsperPage,
     handlePageChange,
-    startIndex,
-    endIndex,
-  } = APIData({ search, location });
+    setSearch,
+    setLocation,
+    search,
+    location,
+  } = useFetch("https://dev.carzup.in/api/pricelist/test-mock");
 
   return (
     <>
@@ -38,13 +37,10 @@ const SecondScreen = () => {
                 placeholder={"Search...."}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                p={"px-8 py-2"}
-                borderwidth={"border"}
-                bordercolor={"border-black"}
-                rounded={"rounded-lg"}
+                className={
+                  "px-8 py-2 border border-black rounded-lg w-72 dark:bg-bodySecondary dark:placeholder:text-black"
+                }
                 type={"text"}
-                width={"w-72"}
-                bgcolor={"dark:bg-gray-200 dark:placeholder:text-black"}
               />
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
@@ -57,14 +53,10 @@ const SecondScreen = () => {
               options={data}
               optionLabel={"location"}
               optionValue={"location"}
-              bgcolor={"dark:bg-gray-200"}
+              className={
+                "dark:bg-bodySecondary border border-black p-2 rounded-lg text-lg w-56"
+              }
               placeholder={"Select Location"}
-              border={"border border-black"}
-              px={"px-2"}
-              py={"py-2"}
-              rounded={"rounded-lg"}
-              textsize={"text-lg"}
-              width={"w-56"}
             />
             <div className="flex items-center gap-4">
               <label className="text-lg">Active Data</label>
@@ -88,45 +80,45 @@ const SecondScreen = () => {
           )}
           {!isError && !isLoading && (
             <div className="grid grid-cols-11 rounded-lg border border-[#073763]">
-              <div className="border rounded-ss-lg border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border rounded-ss-lg border-[#073763] font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Sr No.
               </div>
-              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Name
               </div>
-              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Phone Number
               </div>
-              <div className="border border-[#073763] col-span-3 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border border-[#073763] col-span-3 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Email ID
               </div>
-              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border border-[#073763] col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Location
               </div>
-              <div className="border rounded-tr-lg border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+              <div className="border rounded-tr-lg border-[#073763] font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Status
               </div>
               {currentPage.map((item, index) => (
                 <>
                   <div
                     key={index}
-                    className="text-center py-2 border border-[#073763] dark:bg-gray-200"
+                    className="text-center py-2 border border-[#073763] dark:bg-bodySecondary"
                   >
                     {index + 1 + (page - 1) * itemsperPage}
                   </div>
-                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-gray-200">
+                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-bodySecondary">
                     {item.name}
                   </div>
-                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-gray-200">
+                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-bodySecondary">
                     {item.phone}
                   </div>
-                  <div className="text-center py-2 col-span-3 border border-[#073763] dark:bg-gray-200">
+                  <div className="text-center py-2 col-span-3 border border-[#073763] dark:bg-bodySecondary">
                     {item.email}
                   </div>
-                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-gray-200">
+                  <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-bodySecondary">
                     {item.location}
                   </div>
-                  <div className="justify-center py-2 border border-[#073763] dark:bg-gray-200">
+                  <div className="justify-center py-2 border border-[#073763] dark:bg-bodySecondary">
                     <Switch
                       isChecked={item.active}
                       bgChecked={"bg-blue-500"}

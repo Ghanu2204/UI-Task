@@ -2,25 +2,18 @@ import React from "react";
 
 const Dropdown = ({
   value,
-  width,
-  py,
-  px,
-  bgcolor,
-  textcolor,
-  rounded,
-  textsize,
   options,
   placeholder,
-  border,
   optionValue,
   optionLabel,
   onChange,
+  className
 }) => {
   return (
     <select
       value={value}
       onChange={onChange}
-      className={`${width} ${py} ${px} ${bgcolor} ${textcolor} ${rounded} ${textsize} ${border} `}
+      className={`p-2 ${className}`}
     >
       <option value=''>
         {placeholder}

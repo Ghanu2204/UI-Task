@@ -3,15 +3,9 @@ import React from "react";
 const Textfield = ({
   type,
   placeholder,
-  p,
-  bgcolor,
-  width,
-  rounded,
-  bordercolor,
-  borderwidth,
+  className,
   onChange,
   checked,
-  other,
   value,
 }) => {
   return (
@@ -21,7 +15,7 @@ const Textfield = ({
       value={value}
       onChange={onChange}
       checked={checked}
-      className={`${p} ${bgcolor} ${width} ${rounded} ${borderwidth} ${bordercolor} ${other}`}
+      className={className}
     />
   );
 };

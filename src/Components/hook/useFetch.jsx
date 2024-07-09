@@ -1,32 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const APIData = ({ search, location }) => {
+const useFetch = (url) => {
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [activeData, setActiveData] = useState(false);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
   const itemsperPage = 10;
 
-  let API = "https://dev.carzup.in/api/pricelist/test-mock";
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setIsError(false);
-      try {
-        const response = await fetch(API);
-        const result = await response.json();
-        setData(result.data);
-        setFilterData(result.data);
-      } catch (error) {
-        setIsError(true);
-      }
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    setIsLoading(true);
+    setIsError(false);
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      setData(result.data);
+      setFilterData(result.data);
+    } catch (error) {
+      setIsError(true);
+    }
+    setIsLoading(false);
+  };
 
   const handleactiveData = () => {
     setActiveData((preActive) => !preActive);
@@ -54,6 +51,7 @@ const APIData = ({ search, location }) => {
 
   useEffect(() => {
     setPage(1);
+    fetchData();
   }, [search, location, activeData]);
 
   useEffect(() => {
@@ -100,9 +98,11 @@ const APIData = ({ search, location }) => {
     totalPage,
     itemsperPage,
     handlePageChange,
-    startIndex,
-    endIndex,
+    search,
+    location,
+    setSearch,
+    setLocation,
   };
 };
 
-export default APIData;
+export default useFetch;

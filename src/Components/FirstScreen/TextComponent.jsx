@@ -1,11 +1,7 @@
 import React from "react";
 
-const Text = ({ text, color,size, fontFamily, fontWeight,margin }) => {
-  return (
-    <p className={`${color} ${size} ${fontFamily} ${fontWeight} ${margin}`}>
-      {text}
-    </p>
-  );
+const Text = ({ className, children }) => {
+  return <p className={className}>{children}</p>;
 };
 
 export default Text;

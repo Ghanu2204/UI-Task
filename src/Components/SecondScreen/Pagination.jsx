@@ -1,6 +1,7 @@
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Button from "../FirstScreen/ButtonComponent";
 
 const Pagination = ({ setPage, page, totalPage, handlePageChange }) => {
   const previousPage = () => {
@@ -30,17 +31,17 @@ const Pagination = ({ setPage, page, totalPage, handlePageChange }) => {
         <div className="inline-flex gap-1 rounded-full border border-stroke p-3 dark:bg-gray-200">
           <ul className="flex gap-1 items-center">
             <li>
-              <button
+              <Button
                 onClick={previousPage}
                 disabled={page === 1}
                 className="flex h-10 min-w-10 items-center justify-center rounded-full px-2 text-dark hover:bg-gray-200 dark:hover:bg-gray-300"
               >
                 <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
+              </Button>
             </li>
             <li className="flex">
               {[...Array(totalPage)].map((_, index) => (
-                <button
+                <Button
                   key={index}
                   disabled={page === index + 1}
                   onClick={() => handlePageClick(index + 1)}
@@ -51,17 +52,17 @@ const Pagination = ({ setPage, page, totalPage, handlePageChange }) => {
                   }`}
                 >
                   {index + 1}
-                </button>
+                </Button>
               ))}
             </li>
             <li>
-              <button
+              <Button
                 onClick={nextPage}
                 disabled={page === totalPage}
                 className="flex h-10 min-w-10 items-center justify-center rounded-full px-2 text-black hover:bg-gray-200 dark:hover:bg-gray-300"
               >
                 <FontAwesomeIcon icon={faChevronRight} />
-              </button>
+              </Button>
             </li>
           </ul>
         </div>

@@ -1,27 +1,15 @@
 import React from "react";
 
-const Button = ({
-  label,
-  onClick,
-  type,
-  px,
-  py,
-  bgcolor,
-  condition,
-  bordercolor,
-  bordertopwidth,
-  borderwidth,
-  textcolor,
-  textsize,
-  rounded,
-}) => {
+const Button = ({ children, onClick, type, className, disabled, key }) => {
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
+      key={key}
       type={type}
-      className={`${px} ${py} ${rounded} ${bgcolor} ${condition} ${borderwidth} ${bordertopwidth} ${bordercolor} ${textcolor} ${textsize}`}
+      className={className}
     >
-      {label}
+      {children}
     </button>
   );
 };

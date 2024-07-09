@@ -122,21 +122,21 @@ const Draggable = () => {
           </div>
         </div>
         <hr className="border-black pb-4" />
-        <div className="grid grid-cols-11 ml-3 rounded-lg bg-gray-200 font-semibold">
-          <div className="border rounded-s-lg border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center"></div>
-          <div className="border-t border-r border-b border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+        <div className="grid grid-cols-11 ml-3 rounded-lg bg-bodySecondary font-semibold">
+          <div className="border rounded-s-lg border-[#073763] font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center"></div>
+          <div className="border-t border-r border-b border-[#073763] font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
             Sr.no
           </div>
-          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
             Name
           </div>
-          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
             Phone Number
           </div>
-          <div className="border-t border-r border-b border-[#073763] col-span-3 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+          <div className="border-t border-r border-b border-[#073763] col-span-3 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
             Email ID
           </div>
-          <div className="border-t border-r border-b border-[#073763] rounded-e-lg col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+          <div className="border-t border-r border-b border-[#073763] rounded-e-lg col-span-2 font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
             City
           </div>
         </div>
@@ -155,22 +155,22 @@ const Draggable = () => {
               data-grid={{ x: 0, y: items.indexOf(item), w: 1, h: 1 }}
               className="grid grid-cols-11 items-center rounded-lg"
             >
-              <button className="drag-handle text-center py-2 rounded-s-lg border border-[#073763] dark:bg-gray-200">
+              <button className="drag-handle text-center py-2 rounded-s-lg border border-[#073763] dark:bg-bodySecondary">
                 <FontAwesomeIcon icon={faGrip} />
               </button>
-              <h2 className="text-center py-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+              <h2 className="text-center py-2 border-t border-r border-b border-[#073763] dark:bg-bodySecondary">
                 {index + 1}
               </h2>
-              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-bodySecondary">
                 {item.name}
               </h2>
-              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-bodySecondary">
                 {item.phone}
               </h2>
-              <h2 className="text-center py-2 col-span-3 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+              <h2 className="text-center py-2 col-span-3 border-t border-r border-b border-[#073763] dark:bg-bodySecondary">
                 {item.email}
               </h2>
-              <h2 className="text-center py-2 col-span-2 rounded-e-lg border-t border-r border-b border-[#073763] dark:bg-gray-200">
+              <h2 className="text-center py-2 col-span-2 rounded-e-lg border-t border-r border-b border-[#073763] dark:bg-bodySecondary">
                 {item.city}
               </h2>
             </div>
