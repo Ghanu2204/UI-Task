@@ -1,24 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Text from "../FirstScreen/TextComponent";
 import GridLayout from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faGrip } from "@fortawesome/free-solid-svg-icons";
+import { CSVLink } from "react-csv";
+import Button from "../FirstScreen/ButtonComponent";
 
 const Draggable = () => {
+  const header = [
+    { label: "Name", key: "name" },
+    { label: "Phone Number", key: "phone" },
+    { label: "Email ID", key: "email" },
+    { label: "City", key: "city" },
+  ];
   const data = [
-    { name: "Meet", phone: "9530249502", age: "20" },
-    { name: "Ghanshyam", phone: "7405000554", age: "22" },
-    { name: "Mihir", phone: "8935330259", age: "32" },
-    { name: "Ayush", phone: "9099328503", age: "25" },
-    { name: "Rahul", phone: "7530424832", age: "22" },
-    { name: "Jaydeep", phone: "9421230390", age: "19" },
-    { name: "Shyam", phone: "8101321040", age: "24" },
-    { name: "Neel", phone: "2359892039", age: "29" },
+    {
+      name: "Meet",
+      phone: "9530249502",
+      email: "wmacmeeking3@artisteer.com",
+      city: "Ahmedabad",
+    },
+    {
+      name: "Ghanshyam",
+      phone: "7405000554",
+      email: "jrochester2@odnoklassniki.ru",
+      city: "Surat",
+    },
+    {
+      name: "Mihir",
+      phone: "8935330259",
+      email: "akemitt9@acquirethisname.com",
+      city: "Vapi",
+    },
+    {
+      name: "Ayush",
+      phone: "9099328503",
+      email: "adelcastel6@house.gov",
+      city: "Rajkot",
+    },
+    {
+      name: "Rahul",
+      phone: "7530424832",
+      email: "wwinn1@amazon.de",
+      city: "Junagadh",
+    },
+    {
+      name: "Jaydeep",
+      phone: "9421230390",
+      email: "kmcclurg5@cmu.edu",
+      city: "Patan",
+    },
+    {
+      name: "Shyam",
+      phone: "8101321040",
+      email: "ngillet4@canalblog.com",
+      city: "Bhuj",
+    },
+    {
+      name: "Neel",
+      phone: "2359892039",
+      email: "bmcateer8@bluehost.com",
+      city: "Vadodara",
+    },
   ];
 
   const [items, setItems] = useState(data);
+  const [width, setWidth] = useState(window.innerWidth - 185);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth - 185);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const layout = items.map((item, index) => ({
     i: item.phone,
@@ -32,6 +92,7 @@ const Draggable = () => {
     const sortedItems = [...items].sort((a, b) => {
       const layoutA = layout.find((layoutItem) => layoutItem.i === a.phone);
       const layoutB = layout.find((layoutItem) => layoutItem.i === b.phone);
+      if (!layoutA || !layoutB) return 0;
       return layoutA.y - layoutB.y;
     });
     setItems(sortedItems);
@@ -39,34 +100,83 @@ const Draggable = () => {
 
   return (
     <>
-      <div>
-        <Text text={"Draggable List"} size={"text-2xl"} fontWeight={"font-semibold"} />
-      </div>
-      <GridLayout
-        layout={layout}
-        cols={1}
-        rowHeight={50}
-        width={890}
-        isResizable={false}
-        onLayoutChange={onLayoutChange}
-        draggableHandle=".drag-handle"
-      >
-        {items.map((item, index) => (
-          <div
-            key={item.phone}
-            data-grid={{ x: 0, y: items.indexOf(item), w: 1, h: 1 }}
-            className="flex items-center dark:bg-zinc-700 dark:text-gray-200 bg-[#EFEFEF] p-4 rounded-lg"
-          >
-            <button className="drag-handle">
-              <FontAwesomeIcon icon={faListUl} />
-            </button>
-            <h2 className="w-16 ml-5">{index + 1}</h2>
-            <h2 className="w-44">{item.name}</h2>
-            <h2 className="w-40">{item.phone}</h2>
-            <h2 className="w-60">{item.age}</h2>
+      <div className="flex flex-col">
+        <div className="flex pb-4 justify-between">
+          <Text
+            text={"Draggable List"}
+            size={"text-2xl"}
+            fontWeight={"font-semibold"}
+            margin={"ml-3"}
+          />
+          <div>
+            <CSVLink data={items} filename="data.xls" headers={header}>
+              <Button
+                label={"Export"}
+                rounded={"rounded-lg"}
+                px={"px-5"}
+                py={"py-2"}
+                bgcolor={"bg-blue-500"}
+                textcolor={"text-white"}
+              />
+            </CSVLink>
           </div>
-        ))}
-      </GridLayout>
+        </div>
+        <hr className="border-black pb-4" />
+        <div className="grid grid-cols-11 ml-3 rounded-lg bg-gray-200 font-semibold">
+          <div className="border rounded-s-lg border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center"></div>
+          <div className="border-t border-r border-b border-[#073763] font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+            Sr.no
+          </div>
+          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+            Name
+          </div>
+          <div className="border-t border-r border-b border-[#073763] col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+            Phone Number
+          </div>
+          <div className="border-t border-r border-b border-[#073763] col-span-3 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+            Email ID
+          </div>
+          <div className="border-t border-r border-b border-[#073763] rounded-e-lg col-span-2 font-bold py-2 bg-[#ccfffdb4] dark:bg-[#98fffab4] text-center">
+            City
+          </div>
+        </div>
+        <GridLayout
+          layout={layout}
+          cols={1}
+          rowHeight={50}
+          width={width}
+          isResizable={false}
+          onLayoutChange={onLayoutChange}
+          draggableHandle=".drag-handle"
+        >
+          {items.map((item, index) => (
+            <div
+              key={item.phone}
+              data-grid={{ x: 0, y: items.indexOf(item), w: 1, h: 1 }}
+              className="grid grid-cols-11 items-center rounded-lg"
+            >
+              <button className="drag-handle text-center py-2 rounded-s-lg border border-[#073763] dark:bg-gray-200">
+                <FontAwesomeIcon icon={faGrip} />
+              </button>
+              <h2 className="text-center py-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+                {index + 1}
+              </h2>
+              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+                {item.name}
+              </h2>
+              <h2 className="text-center py-2 col-span-2 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+                {item.phone}
+              </h2>
+              <h2 className="text-center py-2 col-span-3 border-t border-r border-b border-[#073763] dark:bg-gray-200">
+                {item.email}
+              </h2>
+              <h2 className="text-center py-2 col-span-2 rounded-e-lg border-t border-r border-b border-[#073763] dark:bg-gray-200">
+                {item.city}
+              </h2>
+            </div>
+          ))}
+        </GridLayout>
+      </div>
     </>
   );
 };
