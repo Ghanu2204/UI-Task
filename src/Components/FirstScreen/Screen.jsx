@@ -73,28 +73,28 @@ const FirstScreen = () => {
             <Button
               type="submit"
               className={
-                "px-5 py-3 w-32 bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600"
+                "px-5 py-3 w-32 bg-green-600 text-yellow-200 text-xl hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600"
               }
             >
-              <Text className={"text-yellow-200 text-xl"}>Submit</Text>
+              Submit
             </Button>
           </div>
           <div className="justify-center flex w-1/4">
             <Button
               className={
-                "px-6 py-1 h-10 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600"
+                "px-6 py-1 h-10 text-white text-sm bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600"
               }
             >
-              <Text className={"text-white text-sm"}>Delete</Text>
+              Delete
             </Button>
           </div>
           <div className="justify-center flex w-1/4">
             <Button
               className={
-                "px-20 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600"
+                "px-20 bg-blue-600 text-white text-3xl hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600"
               }
             >
-              <Text className={"text-white text-3xl"}>Done</Text>
+              Done
             </Button>
           </div>
         </div>
@@ -203,10 +203,10 @@ const FirstScreen = () => {
             <Button
               onClick={() => setOpen(true)}
               className={
-                "bg-purple-500 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-500 p-3 rounded-lg"
+                "text-white bg-purple-500 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-500 p-3 rounded-lg"
               }
             >
-              <Text className={"text-white"}>Open Dialog</Text>
+              Open Dialog
             </Button>
             <DialogBox
               open={open}

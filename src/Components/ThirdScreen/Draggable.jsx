@@ -102,22 +102,12 @@ const Draggable = () => {
     <>
       <div className="flex flex-col">
         <div className="flex pb-4 justify-between">
-          <Text
-            text={"Draggable List"}
-            size={"text-2xl"}
-            fontWeight={"font-semibold"}
-            margin={"ml-3"}
-          />
+          <Text className={"text-2xl font-semibold ml-3"}>Draggable List</Text>
           <div>
             <CSVLink data={items} filename="data.xls" headers={header}>
-              <Button
-                label={"Export"}
-                rounded={"rounded-lg"}
-                px={"px-5"}
-                py={"py-2"}
-                bgcolor={"bg-blue-500"}
-                textcolor={"text-white"}
-              />
+              <Button className={"rounded-lg px-5 py-2 bg-blue-500 text-white"}>
+                Export
+              </Button>
             </CSVLink>
           </div>
         </div>
