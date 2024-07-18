@@ -132,8 +132,8 @@ const SecondScreen = () => {
                   <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-bodySecondary">
                     {item.location}
                   </div>
-                  <div className="justify-center py-2 border border-[#073763] dark:bg-bodySecondary">
-                    {item.active ? "Active" : "Not Active"}
+                  <div className="text-center py-2 border border-[#073763] dark:bg-bodySecondary">
+                    {item.active ? "Active" : "Inactive"}
                   </div>
                 </>
               ))}
