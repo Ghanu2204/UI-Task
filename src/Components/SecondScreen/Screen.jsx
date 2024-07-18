@@ -1,31 +1,45 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Textfield from "../FirstScreen/TextfieldComponent";
 import Dropdown from "../FirstScreen/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Switch from "../FirstScreen/Switch";
-import Pagination from "./Pagination";
 import useFetch from "../hook/useFetch";
+import { useDebounceText } from "../hook/useDebounceText";
 
 const SecondScreen = () => {
-  const {
-    data,
-    isError,
-    isLoading,
-    handleSwitchChange,
-    handleactiveData,
-    activeData,
-    currentPage,
-    setPage,
-    page,
-    totalPage,
-    itemsperPage,
-    handlePageChange,
-    setSearch,
-    setLocation,
-    search,
-    location,
-  } = useFetch("https://dev.carzup.in/api/pricelist/test-mock");
+  const [filter, setFilter] = useState({
+    search: "",
+    location: "",
+    isActive: "",
+  });
+
+  const [searchText, setSearchText] = useState("");
+
+  const debounceText = useDebounceText(searchText);
+
+  useEffect(() => {
+    setFilter((prev) => ({
+      ...prev,
+      search: debounceText,
+    }));
+  }, [debounceText]);
+
+  const onChangeInput = useCallback((e) => {
+    setSearchText(e.target.value);
+  }, []);
+  const onChangeSelect = useCallback((e) => {
+    setFilter((prev) => ({
+      ...prev,
+      location: e.target.value,
+    }));
+  }, []);
+
+  const onToggleActive = useCallback(() => {
+    setFilter((prev) => ({ ...prev, isActive: !prev.isActive }));
+  }, []);
+
+  const { data, isError, isLoading, errorMessage } = useFetch(filter);
 
   return (
     <>
@@ -35,8 +49,8 @@ const SecondScreen = () => {
             <div className="relative">
               <Textfield
                 placeholder={"Search...."}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchText}
+                onChange={onChangeInput}
                 className={
                   "px-8 py-2 border border-black rounded-lg w-72 dark:bg-bodySecondary dark:placeholder:text-black"
                 }
@@ -48,8 +62,8 @@ const SecondScreen = () => {
               />
             </div>
             <Dropdown
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              value={filter.location}
+              onChange={onChangeSelect}
               options={data}
               optionLabel={"location"}
               optionValue={"location"}
@@ -61,8 +75,8 @@ const SecondScreen = () => {
             <div className="flex items-center gap-4">
               <label className="text-lg">Active Data</label>
               <Switch
-                isChecked={activeData}
-                onChange={handleactiveData}
+                isChecked={filter.isActive}
+                onChange={onToggleActive}
                 bgChecked={"bg-blue-500"}
                 bgUnChecked={"bg-gray-400"}
                 bgUnCheckedColor={"bg-white"}
@@ -75,7 +89,7 @@ const SecondScreen = () => {
           )}
           {isError && (
             <div className="flex items-center justify-center h-[542px]">
-              Error fetching data
+              {errorMessage}
             </div>
           )}
           {!isError && !isLoading && (
@@ -98,13 +112,13 @@ const SecondScreen = () => {
               <div className="border rounded-tr-lg border-[#073763] font-bold py-2 bg-tablehead dark:bg-tableheaddark text-center">
                 Status
               </div>
-              {currentPage.map((item, index) => (
+              {data.map((item, index) => (
                 <>
                   <div
                     key={index}
                     className="text-center py-2 border border-[#073763] dark:bg-bodySecondary"
                   >
-                    {index + 1 + (page - 1) * itemsperPage}
+                    {index + 1}
                   </div>
                   <div className="text-center py-2 col-span-2 border border-[#073763] dark:bg-bodySecondary">
                     {item.name}
@@ -119,27 +133,14 @@ const SecondScreen = () => {
                     {item.location}
                   </div>
                   <div className="justify-center py-2 border border-[#073763] dark:bg-bodySecondary">
-                    <Switch
-                      isChecked={item.active}
-                      bgChecked={"bg-blue-500"}
-                      bgUnChecked={"bg-gray-400"}
-                      bgUnCheckedColor={"bg-white"}
-                      onChange={() => handleSwitchChange(item)}
-                    />
+                    {item.active ? "Active" : "Not Active"}
                   </div>
                 </>
               ))}
             </div>
           )}
         </div>
-        <div>
-          <Pagination
-            totalPage={totalPage}
-            handlePageChange={handlePageChange}
-            setPage={setPage}
-            page={page}
-          />
-        </div>
+        <div></div>
       </div>
     </>
   );
